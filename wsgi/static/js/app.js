@@ -46,7 +46,7 @@ var APP = {
                         contentType: 'application/json',
                         crossDomain: true,   
                         type: "json",
-                        data: JSON.stringify({ numeroReg : contenuto}),
+                        data: JSON.stringify({"numeroReg": contenuto}),
                         dataType: "json",
                         success: function (data) {
                             contenuto = data.numeroReg + " " +
@@ -66,6 +66,44 @@ var APP = {
 
 
         });
+    },
+    init_leggiCampoText2_click: function (){
+        button = $('#leggiCampoTextRegistrazione');
+        button.on('click', function ()
+        {
+            /* copia dal campotesto */
+            el1 = $("#campoTextNumReg");
+            numeroReg = el1.val();
+            
+            el2 = $("#campoTextNome");
+            nome = el2.val();
+            
+            el3 = $("#campoTextCognome");
+            cognome = el3.val();
+            
+            el4 = $("#campoTextAnnoNascita");
+            annoNascita = el4.val();
+            /* chiamata asincrona, non aspetta la fine */
+            $.ajax(
+                    {   method: "POST",
+                        url :"/insertAlunnoPOST/",
+                        contentType: 'application/json',
+                        crossDomain: true,   
+                        type: "json",
+                        data: JSON.stringify({"numeroReg": numeroReg, "nome": nome, "cognome": cognome, "annoNascita": annoNascita}),
+                        dataType: "json",
+                        success:  function(data){
+                            alert("ok");
+                        },
+                        error: function(){
+                            alert("errore");
+                        }
+               });
+
+
+
+        });
+        
     }
 };
 
@@ -79,6 +117,6 @@ $(document).ready(function () {
     APP.init_h3_1_Click();
     APP.init_h3_2_Click();
     APP.init_leggiCampoText1_click();
+    APP.init_leggiCampoText2_click();
 });
-
 

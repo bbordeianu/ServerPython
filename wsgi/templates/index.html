@@ -1,76 +1,57 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <!-- <link href="/static/cs/bootstrap.min.css" rel="stylesheet"> -->
-        <meta name="viewport" content="width=device-width, initial-scale=1"> 
-
-        <link rel="stylesheet" href="/static/css/jquery.mobile-1.4.5.min.css" /> 
-                                        
-        <title>Single Page Application</title>
-    </head>
+<head>
+  <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+  
+  <title>Single Page Application</title>
+</head>
 
 
-    <!-- Layout di pagina ------------------------------------------------------->
-
-    <body>
-
-
-        <div data-role="page">
-            <div data-role="header"><h1>Single Page App</h1></div>
-            <div role="main" class="ui-content">
-                <p> paragrafo
-                    <!--
-                    <a href="device_motion.html" data-role="button">
-                        Device Motion
-                    </a>
-                    <a href="device_orientation.html" data-role="button">
-                        Device Orientation
-                    </a>
-                    -->
-                </p>
-                <div id="pag1">
-                    <div id="riga1">
-
-                        <h3 id="h3_1">Questo h3 è un pulsante:<br/>
-                            se clicko sopra cambio il contenuto del sottostante<br/>
-                            div con id=riga1
-                        </h3>
-
-
-                        <input  id="campoText1" type="text" name="numeroReg" value="01"/><br><br>
-                        <button id="leggiCampoText1" > manda richiesta numeroReg </button>
-                    </div>
-                    <div id="h3_2">
-
-                    </div>
-                    <div id="campoText1-div">
-
-                    </div>
-
-                </div>
-            </div>
-            <div data-role="footer"><h4>Copyright &copy; 2015</h4></div>
+<!-- Layout di pagina ------------------------------------------------------->
+<body>
+  <div id="pag1">
+    <div id="riga1">
+        
+        <h1>INSERISCI NUOVO ALUNNO</h1>
+        
+        <input  id="campoTextNumReg" type="text" name="numeroRegistro" placeholder="Numero registro"/><br><br>
+        <input  id="campoTextNome" type="text" name="nome" placeholder="Nome"/><br><br>
+        <input  id="campoTextCognome" type="text" name="cognome" placeholder="Cognome"/><br><br>
+        <input  id="campoTextAnnoNascita" type="text" name="annoNascita" placeholder="Anno di nascita"/><br><br>
+        <button id="leggiCampoTextRegistrazione" > REGISTRATI </button><br><br>
+        <div id="campoText2-div">
+      
         </div>
-
-
-        <!-- Sezione Template ----------------------------------------------------->
-        <!-- quando saranno un numero sufficinte evidenziamo -->
-
-        <script id="aProductTemplate" type="text/x-jquery-tmpl">
-
-        </script>
-
-        <!-- fine Sezione Template ------------------------------------------------>
-
-
-        <!--  sezione script javascript  ------------------------------------------>
-
-
-       
-        <script src="/static/js/jquery.mobile-1.4.5.min.js"></script>            
-        <script src="/static/js/jquery-2.2.3.min.js"></script>
-        <script src="/static/js/jquery.tmpl.min.js"></script>
-        <!-- <script src="/static/js/bootstrap.min.js"></script> -->
-        <script src="/static/js/app.js"></script>
-    </body>
+        
+        <h1>TROVA NUMERO REGISTRO</h1>
+        
+        <input  id="campoText1" type="text" name="numeroReg" placeholder="Numero registro"/><br><br>
+        <button id="leggiCampoText1" > INVIA </button>
+    </div>
+    <div id="h3_2">
+      
+    </div>
+    <div id="campoText1-div">
+      
+    </div>
+    
+  </div>
+    
+  <!-- Sezione Template ----------------------------------------------------->
+  <!-- quando saranno un numero sufficinte evidenziamo -->
+    
+  <script id="aProductTemplate" type="text/x-jquery-tmpl">
+      
+  </script>
+  
+  <!-- fine Sezione Template ------------------------------------------------>
+  
+  
+  <!--  sezione script javascript  ------------------------------------------>
+  
+  <script src="/static/js/jquery-2.2.3.min.js"></script>
+  <script src="/static/js/jquery.tmpl.min.js"></script>
+  <script src="/static/js/bootstrap.min.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
 </html>

@@ -1,45 +1,34 @@
 from flask import Flask
 
-#---
-import os
 from flask import Flask,request, send_from_directory
 from flask import render_template
 from flask import jsonify
+from json import dumps
 #from flask.ext.cors import CORS
-
-#CORS(app)
-#---
-
-
 
 
 app = Flask(__name__)
-
-# simula molto bene un database di dizionari con chiave numerica
-# i dizionari possono anche essere vuoti alla partenza
-registroAlunni = {0:{"numeroReg":0,"nome":"nome","cognome":"cognome","annoNascita":"1900"}}
-
-
+#CORS(app)
+global registroAlunni
+registroAlunni = {0:{"numeroReg":0,"nome":"ignoto","cognome":"ignoto","annoNascita":"1900"}, 1:{"numeroReg":1,"nome":"ignoto1","cognome":"ignoto1","annoNascita":"1901"}}
+positions = {}
 
 @app.route("/")
 def hello():
-    #DATA_DIR = os.environ.get('OPENSHIFT_DATA_DIR', ".")
-    return render_template('index.html')
+    return render_template( 'index.html')
 
+@app.route("/test")
+def test():
+    return render_template( 'indexTest.html')
 
+@app.route("/js/<nomeFileJs>")
+def jsLoad(nomeFileJs):
+    return send_from_directory('js', nomeFileJs)
 
-#---
-
-
-@app.route("/js/<nomeFilejs>")
-def jsLoad():
-    return send_from_directory('js', nomeFilejs) 
-
-#---
 @app.route("/css/<nomeFileCss>")
 def cssLoad(nomeFileCss):
     return send_from_directory('css', nomeFileCss)
-
+   
 @app.route("/insertAlunno/")  # metodo GET per chiamare dalla barra del browser
 def inserisciAlunno ():
     # spedizione in formato html
@@ -51,7 +40,8 @@ def inserisciAlunno ():
                   "cognome" : cognome , "annoNascita":annoNascita}
     registroAlunni[int(numeroReg)]= dizAlunno
     return "OK"   #restituisce status = 200  OK , ma nessuna stringa
-
+    
+    
 @app.route("/alunnoByNumeroReg/", methods=["POST"]) # metodo POST
 def alunnoByNumeroReg():
     # spedizione in formato html
@@ -59,9 +49,6 @@ def alunnoByNumeroReg():
     numeroReg =  request.json['numeroReg']
     
     dizAlunno = registroAlunni[int(numeroReg)]
-    
-    #print dizAlunno
-    
     # in casi piu' complessi usare render_templates e quindi jsonify
     stringJson = jsonify( ** dizAlunno)
     return stringJson   #aggiunge content-type => json
@@ -81,7 +68,36 @@ def inserisciAlunnoPOST():
     print dizAlunno
     print registroAlunni[int(numeroReg)]
     return jsonify("")
+
+@app.route("/leggiDizionario/", methods = ["POST"])
+def leggiDizionario():
+    stringa = str(registroAlunni)
+    return stringa
+
+@app.route("/insertPosition/", methods = ["POST"])
+def insertPosition():
+    
+    latitude = request.json['latitude']
+    longitude = request.json['longitude']
+    date = request.json['date']
+    
+    coordinate = {"latitude" : latitude, "longitude" : longitude}
+    
+    positions[date] = coordinate
+    print positions
+    return jsonify("")
+
+@app.route("/readPositions/", methods = ["POST"])
+def readPositions():
+    stringa = str(positions)
+    return stringa
+
+@app.route("/cleanPositions/", methods = ["POST"])
+def cleanPositions():
+    positions = {}
+    return ""
     
 if __name__ == "__main__":
     #app.debug=True
-    app.run(debug=True, port=65013)
+    app.run(debug=True, port=5000)
+    #65013
